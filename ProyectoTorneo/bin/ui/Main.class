@@ -1,0 +1,173 @@
+package ui;
+
+import model.*;
+
+import java.util.Scanner;
+
+/**
+ * Main class to run the Football Tournament application.
+ */
+public class Main {
+    private static TournamentController controller = new TournamentController();
+    private static Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Main method to start the application.
+     * @param args Command line arguments
+     */
+    public static void main(String[] args) {
+        controller.preloadData(); // Preload initial data
+        int option;
+        do {
+            showMenu();
+            option = Integer.parseInt(scanner.nextLine());
+            handleOption(option);
+        } while (option != 8); // Option 8 is to exit
+    }
+
+    /**
+     * Displays the main menu.
+     */
+    private static void showMenu() {
+        System.out.println("\n=== Football Tournament Menu ===");
+        System.out.println("1. Register team");
+        System.out.println("2. Register player");
+        System.out.println("3. Register referee");
+        System.out.println("4. Preload data");
+        System.out.println("5. Calculate and display fixture");
+        System.out.println("6. Assign referee to match");
+        System.out.println("7. Register match score");
+        System.out.println("8. Exit");
+        System.out.print("Select an option: ");
+    }
+
+    /**
+     * Handles the selected menu option.
+     * @param option The selected option
+     */
+    private static void handleOption(int option) {
+        switch (option) {
+            case 1 -> registerTeam();
+            case 2 -> registerPlayer();
+            case 3 -> registerReferee();
+            case 4 -> preloadData();
+            case 5 -> createFixture();
+            case 6 -> assignRefereeToMatch();
+            case 7 -> registerMatchScore();
+            case 8 -> System.out.println("Exiting the system...");
+            default -> System.out.println("Invalid option. Please try again.");
+        }
+    }
+
+    /**
+     * Registers a new team.
+     */
+    private static void registerTeam() {
+        System.out.print("Enter the team name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter the team's country: ");
+        String country = scanner.nextLine();
+        System.out.print("Enter the coach's name: ");
+        String coach = scanner.nextLine();
+        if (controller.addTeam(name, country, coach)) {
+            System.out.println("Team registered successfully.");
+        } else {
+            System.out.println("The team already exists.");
+        }
+    }
+
+    /**
+     * Registers a new player to a team.
+     */
+    private static void registerPlayer() {
+        System.out.print("Enter the player's name: ");
+        String playerName = scanner.nextLine();
+        System.out.print("Enter the team name: ");
+        String teamName = scanner.nextLine();
+        System.out.print("Enter the player's age: ");
+        int age = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter the player's position (GOALKEEPER, DEFENDER, MIDFIELDER, FORWARD): ");
+        Position position;
+        try {
+            position = Position.valueOf(scanner.nextLine().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid position. Use GOALKEEPER, DEFENDER, MIDFIELDER, or FORWARD.");
+            return;
+        }
+
+        if (controller.addPlayerToTeam(teamName, playerName, age, position)) {
+            System.out.println("Player registered successfully.");
+        } else {
+            System.out.println("The team does not exist or the player is already registered.");
+        }
+    }
+
+    /**
+     * Registers a new referee.
+     */
+    private static void registerReferee() {
+        System.out.print("Enter the referee's name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter the referee's nationality: ");
+        String nationality = scanner.nextLine();
+        System.out.print("Enter the referee type (MAIN or ASSISTANT): ");
+        RefereeType type;
+        try {
+            type = RefereeType.valueOf(scanner.nextLine().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid referee type. Use MAIN or ASSISTANT");
+            return;
+        }
+        controller.addReferee(name, nationality, type);
+        System.out.println("Referee registered successfully.");
+    }
+
+    /**
+     * Preloads initial data into the system.
+     */
+    private static void preloadData() {
+        controller.preloadData();
+        System.out.println("Data preloaded successfully.");
+    }
+
+    /**
+     * Creates and displays the match fixture.
+     */
+    private static void createFixture() {
+        controller.createFixture();
+    }
+
+    /**
+     * Assigns a referee to a match.
+     */
+    private static void assignRefereeToMatch() {
+        System.out.println("Generated matches:");
+        for (int i = 0; i < controller.getMatches().size(); i++) {
+            Match match = controller.getMatches().get(i);
+            System.out.printf("%d: %s vs %s\n", i, match.getTeam1().getName(), match.getTeam2().getName());
+        }
+        System.out.print("Enter the index of the match to assign a referee: ");
+        int matchIndex = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter the nationality of the referee: ");
+        String nationality = scanner.nextLine();
+        controller.assignRefereeToMatch(matchIndex, nationality);
+    }
+
+    /**
+     * Registers the score of a match.
+     */
+    private static void registerMatchScore() {
+        System.out.println("Generated matches:");
+        for (int i = 0; i < controller.getMatches().size(); i++) {
+            Match match = controller.getMatches().get(i);
+            System.out.printf("%d: %s vs %s\n", i, match.getTeam1().getName(), match.getTeam2().getName());
+        }
+        System.out.print("Enter the index of the match to register the score: ");
+        int matchIndex = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter the score for team 1: ");
+        int scoreTeam1 = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter the score for team 2: ");
+        int scoreTeam2 = Integer.parseInt(scanner.nextLine());
+        controller.setMatchScore(matchIndex, scoreTeam1, scoreTeam2);
+    }
+}
