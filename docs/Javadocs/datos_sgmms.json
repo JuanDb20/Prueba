@@ -1,0 +1,76 @@
+{
+  "rutas": [
+    {
+      "id": "R002",
+      "distancia": 8.2,
+      "tiempoEstimado": 15,
+      "puntoInicio": "Calle Real 789",
+      "puntoFin": "Avenida Central 101"
+    },
+    {
+      "id": "R001",
+      "distancia": 12.5,
+      "tiempoEstimado": 20,
+      "puntoInicio": "Avenida Siempre Viva 123",
+      "puntoFin": "Calle Falsa 456"
+    },
+    {
+      "id": "R0010",
+      "distancia": 50.0,
+      "tiempoEstimado": 30,
+      "puntoInicio": "Cali",
+      "puntoFin": "Bogota"
+    }
+  ],
+  "incidentes": [
+    {
+      "id": "I001",
+      "tipo": "ROBO",
+      "ubicacion": "Calle Falsa 456",
+      "fechaHora": "Mar 1, 2025, 7:00:00 AM",
+      "descripcion": "Robo de cartera en zona comercial",
+      "estado": "pendiente"
+    },
+    {
+      "id": "I002",
+      "tipo": "ACCIDENTE",
+      "ubicacion": "Avenida Central 101",
+      "fechaHora": "Mar 1, 2025, 10:00:00 AM",
+      "descripcion": "Accidente de tránsito entre autobuses",
+      "estado": "en proceso"
+    }
+  ],
+  "pasajeros": [
+    {
+      "id": "P001",
+      "nombre": "Luis Martínez",
+      "contacto": "3101234567"
+    },
+    {
+      "id": "P002",
+      "nombre": "Carolina Gómez",
+      "contacto": "3119876543"
+    }
+  ],
+  "conductores": [
+    {
+      "id": "C001",
+      "nombre": "Miguel Rojas",
+      "vehiculoAsignado": "Bus 101",
+      "estado": "disponible"
+    },
+    {
+      "id": "C002",
+      "nombre": "Andrés López",
+      "vehiculoAsignado": "Taxi 202",
+      "estado": "en ruta"
+    },
+    {
+      "id": "C007",
+      "nombre": "Cristiano Ronaldo",
+      "contacto": "3117777777",
+      "vehiculoAsignado": "March",
+      "estado": "en ruta"
+    }
+  ]
+}

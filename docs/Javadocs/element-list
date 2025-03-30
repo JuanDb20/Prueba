@@ -1,0 +1,5 @@
+module:com.google.gson
+model
+model.comparators
+model.exceptions
+ui

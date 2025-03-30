@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.google.gson","l":"model"},{"m":"com.google.gson","l":"model.comparators"},{"m":"com.google.gson","l":"model.exceptions"},{"m":"com.google.gson","l":"ui"}];updateSearchResults();
